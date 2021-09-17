@@ -1,0 +1,38 @@
+<style>
+  .x {
+    position: absolute;
+    transform: rotate(45deg);
+    top: 20px;
+    left: 20px;
+  }
+
+  .x .horizontal {
+    width: 45px;
+    height: 5px;
+    position: absolute;
+    left: -20px;
+    background: red;
+  }
+
+  .x .vertical {
+    height: 45px;
+    width: 5px;
+    background: red;
+    position: absolute;
+    left: 0px;
+    top: -20px;
+  }
+</style>
+<script>
+  document.addEventListener('mousemove', event => {
+    let div = document.querySelector('.x');
+    let horizontal = event.clientX;
+    let vertical = event.clientY;
+    div.style.left = String(horizontal) + 'px';
+    div.style.top = String(vertical) + 'px'; 
+  });
+</script>
+<div class="x">
+  <div class="horizontal"></div>
+  <div class="vertical"></div>
+</div>
