@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let submit = document.getElementById('submit');
+      let email = document.getElementById('email');
+      let name = document.getElementById('name');
+
+      submit.addEventListener('click', event => {
+        event.preventDefault();
+
+        if (email.value === '' || name.value === '') {
+          alert('Staff cannot be created. Check your inputs.');
+        } else {
+          let request = new XMLHttpRequest();
+          request.open('POST', 'http://localhost:3000/api/staff_members');
+          request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+          request.setRequestHeader('Access-Control-Allow-Origin', 'public/add_staff.html');
+
+          let data = { name: `${name.value}`, email: `${email.value}` };
+          let json = JSON.stringify(data);
+
+          request.send(json);
+        }
+
+        email.value = '';
+        name.value = '';
+      });
+    });
+  </script>
+  <head>
+    <meta charset='utf-8'>
+    <title>Add Staff</title>
+  </head>
+  <body>
+    <form>
+      <div>
+        <label for="email">Email: </label>
+        <input type="text" name="email" id="email" required>
+      </div>
+      <div>
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name" required>
+      </div>
+      <div>
+        <input type="submit" value="Submit" id="submit">
+      </div>
+    </form>
+  </body>
+</html>
