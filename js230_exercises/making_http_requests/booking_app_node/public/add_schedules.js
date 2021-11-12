@@ -1,117 +1,7 @@
-##### JS230 – Front-end Development with JavaScript > Making HTTP Requests
+"use strict";
 
----
+// Functions
 
-### Adding Schedules
-
----
-
-#### Problem
-
-Implement the markup and JavaScript to add one or more schedules. You should handle and inform the user of the different possible responses of the server.  
-
-###### Hint 1
-
-It might not be apparent, but you'll need a way to get the `id` of the staff that you'll be creating a schedule for. You can get the list of staffs via `/api/staff_members. 
-
-###### Hint 2
-
-Your markup and JS should have the ability to add one or more schedules. This means that you'll need to figure out how to serialize the data for either case.  
-
----
-
-#### Examples / Test Cases
-
-
-
----
-
-#### Data Structure
-
-
-
----
-
-#### Algorithm
-
-- Retrieve the staff names.
-- Allow for 
-
----
-
-#### Code
-
-###### HTML
-
-```html
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset="UTF-8">
-    <title>Add Schedules</title>
-    <style>
-  
-    </style>
-  </head>
-  <body>
-    <button type="button">Add more schedules</button>
-    <form>
-      <fieldset id="schedule_1">
-        <legend>Schedule 1</legend>
-        <dl>
-          <dt>
-            <label for="name_1">Staff Name:</label>
-          </dt>
-          <dd>
-            <select name="name_1" id="name_1">
-            </select>
-          </dd>
-          <dt>
-            <label for="date_1">Date:</label>
-          </dt>
-          <dd>
-            <input type="text" id="date_1" name="date_1">
-          </dd>
-          <dt>
-            <label for="time_1">Time:</label>
-          </dt>
-          <dd>
-            <input type="text" id="time_1" name="time_1">
-          </dd>
-        </dl>
-    	</fieldset>
-    </form>
-  </body>
-</html>
-```
-
-###### JS for Retrieving Staff Names
-
-```javascript
-function retrieveStaffNames() {
-  let request = new XMLHttpRequest();
-  request.open('GET', 'api/staff_members');
-  request.responseType = 'json';
-  
-  let staffNames = [];
-  
-  request.addEventListener('load', event => {
-    let staffMembers = request.response;
-    
-    for (let member = 0; member < staffMembers.length; member += 1) {
-      staffNames.push(staffMembers[member].name);
-    };
-  });
-  
-  request.send();
-  
-  return staffNames;
-}
-```
-
-###### JS for creating a fieldset element for the form element
-
-```javascript
 function createFieldsetElement(scheduleNumber) {
   let fieldset = document.createElement('fieldset');
   fieldset.id = `schedule_${scheduleNumber}`;
@@ -125,11 +15,7 @@ function createFieldsetElement(scheduleNumber) {
   
   return fieldset;
 }
-```
 
-###### JS for creating dl element
-
-```javascript
 function createDlElement(scheduleNumber) {
   let dl = document.createElement('dl');
   
@@ -202,13 +88,6 @@ function createDdElement(type, scheduleNumber) {
   
   return dd;
 }
-```
-
-###### JS populating the form element (add schedules to form element)
-
-```javascript
-// This function must be called within a 'DOMContentLoaded' event listener on the document
-// element.
 
 function addSchedulesToForm() {
   let form = document.querySelector('form');
@@ -226,32 +105,27 @@ function addSchedulesToForm() {
     form.insertBefore(fieldset, form.elements[elements.length - 1]);
   }
 }
-```
 
-###### JS for adding the staff names to the select element of the form
+function retrieveStaffNames() {
+  let request = new XMLHttpRequest();
+  request.open('GET', 'api/staff_members');
+  request.responseType = 'json';
 
-```javascript
-const StaffNames = retrieveStaffNames();
+  let staffNames = [];
 
-document.addEventListener('DOMContentLoaded', () => {
-  addSchedulesToForm();
+  request.addEventListener('load', event => {
+    let staffMembers = request.response;
 
-  setTimeout(() => {
-    let select = document.getElementById('name_1');
+    for (let member = 0; member < staffMembers.length; member += 1) {
+      staffNames.push(staffMembers[member].name);
+    };
+  });
 
-    for (let index = 0; index < StaffNames.length; index += 1) {
-      let option = document.createElement('option');
-      option.text = StaffNames[index];
-      option.value = StaffNames[index];
-      select.append(option);
-    }
-  }, 10);
-});
-```
+  request.send();
 
-###### JS for inserting additional schedules into the form element when "Add more schedules" button is pressed
+  return staffNames;
+}
 
-```javascript
 const StaffNames = retrieveStaffNames();
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -286,5 +160,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-```
-
