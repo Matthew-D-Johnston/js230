@@ -75,6 +75,7 @@ function createDdElement(type, scheduleNumber) {
       inputDate.type = 'text';
       inputDate.id = `date_${scheduleNumber}`;
       inputDate.name = `date_${scheduleNumber}`;
+      inputDate.placeholder = "mm-dd-yy";
       dd.append(inputDate);
       break;
     case 'time':
@@ -82,6 +83,7 @@ function createDdElement(type, scheduleNumber) {
       inputTime.type = 'text';
       inputTime.id = `time_${scheduleNumber}`;
       inputTime.name = `time_${scheduleNumber}`;
+      inputTime.placeholder = "hh:mm";
       dd.append(inputTime);
       break;
   }
@@ -124,6 +126,106 @@ function retrieveStaffNames() {
   request.send();
 
   return staffNames;
+}
+
+function retrieveScheduleInputData() {
+  let inputs = document.querySelectorAll('input');
+  let inputsArr = [];
+  for (let index = 0; index < inputs.length - 1; index += 1) {
+    inputsArr.push(inputs[index]);
+  }
+  
+  return inputsArr;
+}
+
+function retrieveDateInputs() {
+  let inputs = retrieveScheduleInputData();
+  return inputs.filter((input, index) => index % 2 === 0);
+}
+
+function retrieveTimeInputs() {
+  let inputs = retrieveScheduleInputData();
+  return inputs.filter((input, index) => index % 2 === 1);
+}
+
+function verifyInputData() {
+  let dateInputs = retrieveDateInputs();
+  let timeInputs = retrieveTimeInputs();
+  
+  for (let index = 0; index < dateInputs.length; index += 1) {
+    let dateValue = dateInputs[index].value;
+    let timeValue = timeInputs[index].value;
+    
+    if (dateValue.length < 8 || timeValue.length < 5) {
+      alert('Please check your inputs');
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function retrieveStaffNamesAndIds() {
+  let request = new XMLHttpRequest();
+  request.open('GET', 'api/staff_members');
+  request.responseType = 'json';
+
+  let namesAndIds = [];
+
+  request.addEventListener('load', event => {
+    let staffMembers = request.response;
+
+    for (let member = 0; member < staffMembers.length; member += 1) {
+      let staff = {};
+      staff.name = staffMembers[member].name;
+      staff.id = staffMembers[member].id;
+
+      namesAndIds.push(staff);
+    };
+  });
+
+  request.send();
+
+  return namesAndIds;
+}
+
+const NamesAndIds = retrieveStaffNamesAndIds();
+
+function constructScheduleData() {
+  if (verifyInputData()) {
+    let nameInputs = document.querySelectorAll('select');
+    let dateInputs = retrieveDateInputs();
+    let timeInputs = retrieveTimeInputs();
+    let namesAndIds = retrieveStaffNamesAndIds();
+    
+    let data = {
+      schedules: [
+        
+      ]
+    }
+    
+    for (let index = 0; index < nameInputs.length; index += 1) {
+      let name = nameInputs[index].value;
+      let staffId;
+      for (let member = 0; member < NamesAndIds.length; member += 1) {
+        if (NamesAndIds[member].name === name) {
+          staffId = NamesAndIds[member].id;
+        }
+      }
+
+      let date = dateInputs[index].value;
+      let time = timeInputs[index].value;
+      let schedule = {};
+      
+      schedule.staff_id = staffId;
+      schedule.date = date;
+      schedule.time = time;
+      
+      data.schedules.push(schedule);
+    }
+    
+    return data;
+  }
 }
 
 const StaffNames = retrieveStaffNames();

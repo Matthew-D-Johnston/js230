@@ -37,6 +37,32 @@ Your markup and JS should have the ability to add one or more schedules. This me
 - Retrieve the staff names.
 - Allow for 
 
+
+
+##### Submitting the Form Data to Add One or More Schedules
+
+###### Steps:
+
+1) Check that all the form fields are filled out for each schedule.
+
+2) Collect the data for each schedule: switch the staff name for the staff id as a number; keep date as a string; and keep time as a string. The data can be stored in an array called `"schedules"`, and each schedule is an object with the following keys: `"staff_id"`, `"date"`, and `"time"`. Below is an example of what it should look like:
+
+   ```
+   {
+       "schedules": [
+           {
+               "staff_id": 1,
+               "date": "10-10-10",
+               "time": "12:12"
+           }
+       ]
+   }
+   ```
+
+3) Submit the data using a `POST` request to `/api/schedules`
+
+   
+
 ---
 
 #### Code
@@ -52,34 +78,12 @@ Your markup and JS should have the ability to add one or more schedules. This me
     <style>
   
     </style>
+    <script src="add_schedules.js"></script>
   </head>
   <body>
     <button type="button">Add more schedules</button>
     <form>
-      <fieldset id="schedule_1">
-        <legend>Schedule 1</legend>
-        <dl>
-          <dt>
-            <label for="name_1">Staff Name:</label>
-          </dt>
-          <dd>
-            <select name="name_1" id="name_1">
-            </select>
-          </dd>
-          <dt>
-            <label for="date_1">Date:</label>
-          </dt>
-          <dd>
-            <input type="text" id="date_1" name="date_1">
-          </dd>
-          <dt>
-            <label for="time_1">Time:</label>
-          </dt>
-          <dd>
-            <input type="text" id="time_1" name="time_1">
-          </dd>
-        </dl>
-    	</fieldset>
+      <input type="button" value="Submit">
     </form>
   </body>
 </html>
@@ -286,5 +290,150 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+```
+
+###### JS for retrieving staff_id given the staff member's name
+
+```javascript
+let staffId;
+function retrieveStaffId(name) {
+  let request = new XMLHttpRequest();
+  request.open('GET', 'api/staff_members');
+  request.responseType = 'json';
+
+  request.addEventListener('load', event => {
+    let staffMembers = request.response;
+
+    for (let member = 0; member < staffMembers.length; member += 1) {
+      if (staffMembers[member].name === name) {
+        staffId = staffMembers[member].id;
+      }
+    };
+  });
+
+  request.send();
+}
+```
+
+###### JS to retrieve all input elements except final input button
+
+```javascript
+function retrieveScheduleInputData() {
+  let inputs = document.querySelectorAll('input');
+  let inputsArr = [];
+  for (let index = 0; index < inputs.length - 1; index += 1) {
+    inputsArr.push(inputs[index]);
+  }
+  
+  return inputsArr;
+}
+```
+
+###### JS to retrieve all date input elements
+
+```javascript
+function retrieveDateInputs() {
+  let inputs = retrieveScheduleInputData();
+  return inputs.filter((input, index) => index % 2 === 0);
+}
+```
+
+###### JS to retrieve all time input elements
+
+```javascript
+function retrieveTimeInputs() {
+  let inputs = retrieveScheduleInputData();
+  return inputs.filter((input, index) => index % 2 === 1);
+}
+```
+
+###### JS to verify that all input data is complete
+
+```javascript
+function verifyInputData() {
+  let dateInputs = retrieveDateInputs();
+  let timeInputs = retrieveTimeInputs();
+  
+  for (let index = 0; index < dateInputs.length; index += 1) {
+    let dateValue = dateInputs[index].value;
+    let timeValue = timeInputs[index].value;
+    
+    if (dateValue.length < 8 || timeValue.length < 5) {
+      alert('Please check your inputs');
+      break;
+    }
+  }
+}
+```
+
+###### JS for retrieving staff names and ids
+
+```javascript
+function retrieveStaffNamesAndIds() {
+  let request = new XMLHttpRequest();
+  request.open('GET', 'api/staff_members');
+  request.responseType = 'json';
+
+  let namesAndIds = [];
+
+  request.addEventListener('load', event => {
+    let staffMembers = request.response;
+
+    for (let member = 0; member < staffMembers.length; member += 1) {
+      let staff = {};
+      staff.name = staffMembers[member].name;
+      staff.id = staffMembers[member].id;
+
+      namesAndIds.push(staff);
+    };
+  });
+
+  request.send();
+
+  return namesAndIds;
+}
+```
+
+###### JS for creating schedule data to POST
+
+```javascript
+const NamesAndIds = retrieveStaffNamesAndIds();
+
+function constructScheduleData() {
+  if (verifyInputData()) {
+    let nameInputs = document.querySelectorAll('select');
+    let dateInputs = retrieveDateInputs();
+    let timeInputs = retrieveTimeInputs();
+    let namesAndIds = retrieveStaffNamesAndIds();
+    
+    let data = {
+      schedules: [
+        
+      ]
+    }
+    
+    for (let index = 0; index < nameInputs.length; index += 1) {
+      let name = nameInputs[index].value;
+      let staffId;
+      for (let member = 0; member < NamesAndIds.length; member += 1) {
+        if (NamesAndIds[member].name === name) {
+          staffId = NamesAndIds[member].id;
+        }
+      }
+
+      let date = dateInputs[index].value;
+      let time = timeInputs[index].value;
+      let schedule = {};
+      
+      schedule.staff_id = staffId;
+      schedule.date = date;
+      schedule.time = time;
+      
+      data.schedules.push(schedule);
+    }
+    
+    return data;
+  }
+}
 ```
 
