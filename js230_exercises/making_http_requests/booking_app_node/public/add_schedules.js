@@ -229,6 +229,7 @@ function constructScheduleData() {
 }
 
 const StaffNames = retrieveStaffNames();
+let scheduleData;
 
 document.addEventListener('DOMContentLoaded', () => {
   addSchedulesToForm();
@@ -260,5 +261,33 @@ document.addEventListener('DOMContentLoaded', () => {
       option.value = StaffNames[index];
       lastSelectElement.append(option);
     }
+  });
+
+  let submit = document.getElementById('submit');
+
+  submit.addEventListener('click', event => {
+    event.preventDefault();
+
+    scheduleData = constructScheduleData();
+    let jsonData = JSON.stringify(scheduleData);
+
+    let request = new XMLHttpRequest();
+    request.open('POST', 'api/schedules');
+    request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+
+    request.addEventListener('load', event => {
+      let response = request.status;
+      
+      switch(response) {
+        case 201:
+          alert('Staff schedules updated');
+          break;
+        case 400:
+          alert('Server error');
+          break;
+      }
+    });
+
+    request.send(jsonData);
   });
 });
