@@ -39,8 +39,6 @@
 //   newGame.createBlanksInWordContainer();  
 // });
 
-// LS Solution
-
 document.addEventListener('DOMContentLoaded', event => {
   const message = document.querySelector("#message");
   const letters = document.querySelector("#spaces");
