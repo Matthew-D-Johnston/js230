@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', event => {
     Handlebars.registerPartial(tmpl["id"], tmpl["innerHTML"]);
   });
 
+  let likeButton;
+  let favoriteButton;
+
   fetch("/photos")
     .then(response => response.json())
     .then(json => {
@@ -19,19 +22,112 @@ document.addEventListener('DOMContentLoaded', event => {
       renderPhotos();
       renderPhotoInformation(photos[0].id);
       getCommentsFor(photos[0].id);
+      likeButton = document.querySelector('a.button.like');
+      likeButton.addEventListener('click', updateLikes);
+      favoriteButton = document.querySelector('a.button.favorite');
+      favoriteButton.addEventListener('click', updateFavorites);
   });
 
   document.querySelector('a.next').addEventListener('click', event => {
     event.preventDefault();
 
     nextSlide();
+    likeButton = document.querySelector('a.button.like');
+    likeButton.addEventListener('click', updateLikes);
+    favoriteButton = document.querySelector('a.button.favorite');
+    favoriteButton.addEventListener('click', updateFavorites);
   });
 
   document.querySelector('a.prev').addEventListener('click', event => {
     event.preventDefault();
 
     previousSlide();
+    likeButton = document.querySelector('a.button.like');
+    likeButton.addEventListener('click', updateLikes);
+    favoriteButton = document.querySelector('a.button.favorite');
+    favoriteButton.addEventListener('click', updateFavorites);
   });
+
+  let form = document.querySelector('form');
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    
+    let formData = new FormData(form);
+
+    let encodedName = encodeURIComponent(formData.get("name"));
+    let encodedId = encodeURIComponent(formData.get("photo_id"));
+    let encodedEmail = encodeURIComponent(formData.get("email"));
+    let encodedBody = encodeURIComponent(formData.get("body"));
+
+    let data = `photo_id=${encodedId}&name=${encodedName}&email=${encodedEmail}&body=${encodedBody}`;
+    console.log(data);
+
+    fetch('/comments/new', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      },
+      body: data
+    })
+    .then(response => response.json())
+    .then(json => {
+      let comment_list = document.querySelector("#comments ul");
+      comment_list.insertAdjacentHTML('beforeend', templates.photo_comments({ comments: [json] }));
+      form.reset();
+    });
+  });
+
+  function updateLikes(event) {
+    event.preventDefault();
+    
+    let request = new XMLHttpRequest();
+    request.open('POST', '/photos/like');
+    request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    let photoId = likeButton.dataset.id;
+    let data = { photo_id: photoId };
+    let json = JSON.stringify(data);
+
+    request.addEventListener('load', event => {
+      let response = JSON.parse(request.response);
+      let total = response.total;
+
+      likeButton.innerText = likeButton.innerText.replace(/\d+/g, total);
+
+      fetch("/photos")
+        .then(response => response.json())
+        .then(json => {
+          photos = json;
+      });
+    });
+
+    request.send(json);
+  }
+
+  function updateFavorites(event) {
+    event.preventDefault();
+    
+    let request = new XMLHttpRequest();
+    request.open('POST', '/photos/favorite');
+    request.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    let photoId = favoriteButton.dataset.id;
+    let data = { photo_id: photoId };
+    let json = JSON.stringify(data);
+
+    request.addEventListener('load', event => {
+      let response = JSON.parse(request.response);
+      let total = response.total;
+
+      favoriteButton.innerText = favoriteButton.innerText.replace(/\d+/g, total);
+
+      fetch("/photos")
+        .then(response => response.json())
+        .then(json => {
+          photos = json;
+      });
+    });
+
+    request.send(json);
+  }
 
   function renderPhotos() {
     let slides = document.getElementById('slides');
@@ -76,6 +172,8 @@ document.addEventListener('DOMContentLoaded', event => {
 
     clearComments();
     getCommentsFor(slideId);
+
+    document.querySelector('fieldset input[type="hidden"]').value = String(slideId);
   }
 
   function previousSlide() {
@@ -99,6 +197,8 @@ document.addEventListener('DOMContentLoaded', event => {
 
     clearComments();
     getCommentsFor(slideId);
+
+    document.querySelector('fieldset input[type="hidden"]').value = String(slideId);
   }
 
   function clearHeader() {
