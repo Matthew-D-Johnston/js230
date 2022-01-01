@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Programming Languages Info</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="programming_languages_info.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="programming_languages_info.js"></script>
+  </head>
+  <body>
+    <h1>Programming Languages</h1>
+    <dl>
+      
+    </dl>
+    <script id="languages_list" type="text/x-handlebars">
+      {{#each languages}}
+      {{> programming_language}}
+      {{/each}}
+    </script>
+
+    <script id="programming_language" data-type="partial" type="text/x-handlebars">
+      <div>
+        <dt>{{name}}</dt>
+        <dd>{{description}}</dd>
+        <button type="button">Show More</button>
+      </div>
+    </script>
+  </body>
+</html>
