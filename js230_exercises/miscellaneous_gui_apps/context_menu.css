@@ -1,0 +1,133 @@
+@import url("whitespace-reset.css");
+
+body {
+  background: #236643;
+}
+
+
+
+h1 {
+  font-size: 30px;
+  color: #fff;
+  margin: 40px 0 0 25px;
+}
+
+ul#todos {
+  width: 600px;
+  margin-left: 60px;
+  margin-top: 20px;
+}
+
+ul#todos li {
+  font-size: 18px;
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+ul#todos a {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  position: relative;
+  top: -8px;
+  color: red;
+  text-decoration: none;
+  float: right;
+}
+
+#modal {
+  display: none;
+  z-index: 1;
+  position: absolute;
+  background: black;
+  opacity: 30%;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+#dialog {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  top: 20%;
+  left: 40%;
+  width: 450px;
+  height: 150px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+menu {
+  display: none;
+  position: fixed;
+  list-style: none;
+  z-index: 2;
+  background: #fff;
+  width: 200px;
+  height: 120px;
+  font-size: 18px;
+  box-sizing: border-box;
+  padding: 0;
+  border-radius: 4px;
+}
+
+menu li {
+  box-sizing: border-box;
+  width: 100%;
+  height: 32.7%;
+  background: #CCCCCC;
+  padding: 8px 0 5px 10px;
+  cursor: pointer;
+}
+
+menu li:hover {
+  background: #808080;
+  color: #fff;
+}
+
+li#edit {
+  border-radius: 4px 4px 0 0;
+  margin-bottom: 1px;
+}
+
+li#delete {
+  border-radius: 0 0 4px 4px;
+  margin-top: 1px;
+}
+
+div > p {
+  font-size: 18px;
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+div.button {
+  float: right;
+  margin-right: 15px;
+  margin-top: 50px;
+}
+
+div button {
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  width: 55px;
+  height: 30px;
+}
+
+div button:hover {
+  cursor: pointer;
+}
+
+#yes {
+  background: #9F1331;
+  margin-right: 5px;
+}
+
+#no {
+  background: #279F36;
+}
