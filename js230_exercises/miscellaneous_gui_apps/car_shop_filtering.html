@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Cars for sale</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="car_shop_filtering.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="car_shop_filtering.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Buy Used Cars</h1>
+      <form class="filters">
+        <fieldset>
+          <ul id="filters">
+            <li class="make">
+              <label for="make">Make</label>
+              <select name="make" id="make">
+              </select>
+            </li>
+            <li class="model">
+              <label for="model">Model</label>
+              <select name="model" id="model">
+              </select>
+            </li>
+            <li class="price">
+              <label for="price">Price</label>
+              <select name="price" id="price">
+              </select>
+            </li>
+            <li class="year">
+              <label for="year">Year</label>
+              <select name="year" id="year">
+              </select>
+            </li>
+            <li class="button">
+              <button type="submit">Filter</button>
+            </li>
+          </ul>
+        </fieldset>
+      </form>
+    </header>
+    <ul id="cars">
+    </ul>
+
+    <script id="cars_template" type="text/x-handlebars">
+      {{#each car}}
+      <figure>
+        <img src="{{image}}" alt="{{make}} {{model}}">
+        <figcaption><p class="bold">{{make}} {{model}}</p><p>Year: {{year}}</p><p>Price: ${{price}}</p></figcaption>
+        <button type=button>Buy</button>
+      </figure>
+      {{/each}}
+    </script>
+  </body>
+</html>
