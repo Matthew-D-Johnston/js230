@@ -1,0 +1,81 @@
+@import url("whitespace-reset.css");
+
+header {
+  background: #E29821;
+  color: #fff;
+  width: 100%;
+  height: 100px;
+  border-radius: 4px;
+}
+
+h1 {
+  padding: 20px 0 15px 20px;
+  font-size: 24px;
+}
+
+header form {
+  padding-left: 20px;
+}
+
+header li {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+header label {
+  margin-right: 5px;
+}
+
+select {
+  color: #fff;
+  background: #E29821;
+  border-color: #fff;
+  border-radius: 3px;
+  width: 80px;
+  height: 24px;
+}
+
+header button {
+  margin-left: 20px;
+  color: #fff;
+  background: #E29821;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  width: 50px;
+  height: 24px;
+}
+
+figure {
+  display: inline-block;
+  vertical-align: bottom;
+  margin: 0 20px 20px 0;
+}
+
+img {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+ul#cars {
+  padding: 30px 0 0 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+ul#cars p {
+  margin-bottom: 5px;
+}
+
+ul#cars button {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
+  color: #fff;
+  background: #E29821;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  width: 50px;
+  height: 35px;
+  cursor: pointer;
+}
