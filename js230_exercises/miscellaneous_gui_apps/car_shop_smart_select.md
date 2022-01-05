@@ -245,7 +245,6 @@ document.addEventListener('DOMContentLoaded', event => {
         });
 
         if (menu === 'make') {
-          console.log(make);
           createSelectOptions(menu, data, make);
         } else if (menu === 'model') {
           createSelectOptions(menu, data, model);
@@ -255,6 +254,13 @@ document.addEventListener('DOMContentLoaded', event => {
           createSelectOptions(menu, data, year);
         }
       });
+
+      if (make === 'all' && model === 'all' && price === 'any' && year === 'any') {
+        createSelectOptions('make', Makes);
+        createSelectOptions('model', Models);
+        createSelectOptions('price', Prices);
+        createSelectOptions('year', Years);
+      }
     });
   }
 
