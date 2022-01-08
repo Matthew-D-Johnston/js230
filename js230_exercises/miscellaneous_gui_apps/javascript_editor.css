@@ -1,0 +1,71 @@
+@import url("whitespace-reset.css");
+
+body {
+  background: #5555FF;
+}
+
+h1 {
+  color: #fff;
+  font-size: 24px;
+  margin: 20px 0 30px 0;
+  text-align: center;
+}
+
+div.editor {
+  display: block;
+  width: 800px;
+  margin: auto;
+  overflow: auto;
+}
+
+div.menu {
+  background: #CCCCCC;
+  height: 30px;
+  padding-right: 10px;
+}
+
+div.text {
+  height: 470px;
+  background: #fff;
+  outline: none;
+  padding: 5px;
+  overflow: auto;
+}
+
+button {
+  border: none;
+  background: #CCCCCC;
+  margin-top: 5px;
+  margin-left: 5px;
+  padding-top: 2px;
+  width: 25px;
+  height: 20px;
+  border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+button:hover {
+  background: #EBEBEB;
+}
+
+.on {
+  background: #EBEBEB;
+}
+
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
+li {
+  display: list-item;
+  list-style-position: inside;
+  margin-left: 20px;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Editor</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="javascript_editor.css">
+    <script src="https://kit.fontawesome.com/62dd22e480.js" crossorigin="anonymous"></script>
+    <script src="javascript_editor.js"></script>
+  </head>
+  <body>
+    <h1>Rich Text Editor</h1>
+    <div class="editor">
+      <div class="menu">
+        <button id="bold" class="fas fa-bold off"></button>
+        <button id="italic" class="fas fa-italic off"></button>
+        <button id="underline" class="fas fa-underline off"></button>
+        <button id="strikethrough" class="fas fa-strikethrough off"></button>
+        <button id="link" class="fas fa-link off"></button>
+        <button id="ul-list" class="fas fa-list off"></button>
+        <button id="ol-list" class="fas fa-list-ol off"></button>
+        <button id="align-left" class="fas fa-align-left on"></button>
+        <button id="align-right" class="fas fa-align-right off"></button>
+        <button id="align-center" class="fas fa-align-center off"></button>
+        <button id="align-justify" class="fas fa-align-justify off"></button>
+      </div>
+      <div id="text-editor" class="text" contenteditable="true">
+      </div>
+    </div>
+  </body>
+</html>
