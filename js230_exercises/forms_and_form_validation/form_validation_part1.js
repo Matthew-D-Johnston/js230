@@ -155,25 +155,177 @@ let App = {
     document.querySelector('button').addEventListener('click', event => {
       event.preventDefault();
 
+      let atLeastOneError = false;
+
       if (!this.isFirstNameValid()) {
         this.displayFirstNameErrorMessage();
-        console.log('value missing');
+        atLeastOneError = true;
       }
 
       if (!this.isLastNameValid()) {
         this.displayLastNameErrorMessage();
+        atLeastOneError = true;
       }
 
       if (!this.isEmailValid()) {
         this.displayEmailErrorMessage();
+        atLeastOneError = true;
       }
 
       if (!this.isPasswordValid()) {
         this.displayPasswordErrorMessage();
+        atLeastOneError = true;
       }
 
       if (!this.isPhoneNumberValid()) {
         this.displayPhoneNumberErrorMessage();
+        atLeastOneError = true;
+      }
+
+      if (atLeastOneError) {
+        document.querySelector('.main-error').style.visibility = 'visible';
+      }
+    });
+  },
+
+  validateAll: function() {    
+    this.firstNameInput.addEventListener('blur', () => {
+      let atLeastOneError = false;
+
+      if (!this.isFirstNameValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isLastNameValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isEmailValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isPasswordValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isPhoneNumberValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!atLeastOneError) {
+        document.querySelector('.main-error').style.visibility = 'hidden';
+      }
+    });
+
+    this.lastNameInput.addEventListener('blur', () => {
+      let atLeastOneError = false;
+
+      if (!this.isFirstNameValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isLastNameValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isEmailValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isPasswordValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isPhoneNumberValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!atLeastOneError) {
+        document.querySelector('.main-error').style.visibility = 'hidden';
+      }
+    });
+
+    this.emailInput.addEventListener('blur', () => {
+      let atLeastOneError = false;
+
+      if (!this.isFirstNameValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isLastNameValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isEmailValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isPasswordValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isPhoneNumberValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!atLeastOneError) {
+        document.querySelector('.main-error').style.visibility = 'hidden';
+      }
+    });
+
+    this.passwordInput.addEventListener('blur', () => {
+      let atLeastOneError = false;
+
+      if (!this.isFirstNameValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isLastNameValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isEmailValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isPasswordValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isPhoneNumberValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!atLeastOneError) {
+        document.querySelector('.main-error').style.visibility = 'hidden';
+      }
+    });
+
+    this.phoneInput.addEventListener('blur', () => {
+      let atLeastOneError = false;
+
+      if (!this.isFirstNameValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isLastNameValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isEmailValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isPasswordValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!this.isPhoneNumberValid()) {
+        atLeastOneError = true;
+      }
+
+      if (!atLeastOneError) {
+        document.querySelector('.main-error').style.visibility = 'hidden';
       }
     });
   },
@@ -197,4 +349,5 @@ document.addEventListener('DOMContentLoaded', () => {
   app.validatePasswordInput();
   app.validatePhoneNumberInput();
   app.validateAllOnSubmission();
+  app.validateAll();
 });

@@ -80,3 +80,12 @@ button {
   color: #B65252;
   font-size: 18px;
 }
+
+.main-error {
+  visibility: hidden;
+  display: inline-block;
+  position: absolute;
+  color: #B65252;
+  font-size: 18px;
+  margin: 10px 0 0 25px;
+}
