@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Form Validation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="form_validation_part1.css">
+    <script src="form_validation_part1.js"></script>
+  </head>
+  <body>
+    <div>
+    <h1>Sign up Form</h1>
+    <form novalidate>
+      <fieldset>
+        <dl>
+          <dt>
+            <label for="first-name">First Name</label>
+          </dt>
+          <dd>
+            <input type="text" id="first-name" name="first-name" required>
+            <p class="error-message"></p>
+          </dd>
+          <dt>
+            <label for="last-name">Last Name</label>
+          </dt>
+          <dd>
+            <input type="text" id="last-name" name="last-name" required>
+            <p class="error-message"></p>
+          </dd>
+          <dt>
+            <label for="email">Email</label>
+          </dt>
+          <dd>
+            <input type="email" id="email" name="email" placeholder="someone@example.com" pattern=".+@.+" required>
+            <p class="error-message"></p>
+          </dd>
+          <dt>
+            <label for="password">Password</label>
+          </dt>
+          <dd>
+            <input type="password" id="password" name="password" minlength="10" required>
+            <p class="error-message"></p>
+          </dd>
+          <dt>
+            <label for="phone">Phone Number</label>
+          </dt>
+          <dd>
+            <input type="text" id="phone" name="phone" placeholder="111-222-3333" pattern="\d{3}-\d{3}-\d{4}">
+            <p class="error-message"></p>
+          </dd>
+        </dl>
+      </fieldset>
+      <button type="submit">Sign Up</button>
+    </form>
+    </div>
+  </body>
+</html>
