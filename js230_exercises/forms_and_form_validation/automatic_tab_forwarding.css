@@ -1,0 +1,95 @@
+@import url("whitespace-reset.css");
+
+body {
+  background: #53BE42;
+}
+
+div {
+  display: block;
+  margin: auto;
+  width: 800px;
+}
+
+h1 {
+  margin: 60px 0 20px 0;
+  font-size: 26px;
+  color: #fff;
+}
+
+form {
+  background: #fff;
+  border-radius: 4px;
+  width: 100%;
+  height: 580px;
+}
+
+fieldset {
+  border: none;
+  margin-left: 25px;
+  padding-top: 40px;
+}
+
+dt {
+  font-size: 18px;
+}
+
+dd {
+  margin: 5px 0 20px 0;
+}
+
+input {
+  display: inline-block;
+  font-size: 18px;
+  height: 35px;
+  width: 300px;
+  border-radius: 5px;
+  border: none;
+  outline: 1px solid #CCCCCC;
+  padding-left: 10px;
+}
+
+input.invalid {
+  outline: 1px solid #B65252;
+}
+
+input:focus {
+  outline: 1px solid #53BE42;
+}
+
+input:focus:valid {
+  outline: 1px solid #53BE42;
+}
+
+input[name="credit"] {
+  width: 60px;
+}
+
+button {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  width: 100px;
+  height: 30px;
+  border-radius: 4px;
+  margin-left: 25px;
+  background-color: #53BE42;
+  border: none;
+}
+
+.error-message {
+  display: inline-block;
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 30px;
+  color: #B65252;
+  font-size: 18px;
+}
+
+.main-error {
+  visibility: hidden;
+  display: inline-block;
+  position: absolute;
+  color: #B65252;
+  font-size: 18px;
+  margin: 10px 0 0 25px;
+}
