@@ -1,0 +1,84 @@
+@import url("whitespace-reset.css");
+
+body {
+  background: #EEE9CE;
+}
+
+div#quiz {
+  display: block;
+  margin: auto;
+  width: 600px;
+}
+
+h1 {
+  font-size: 24px;
+  margin: 20px 0 30px 0;
+}
+
+dl {
+  font-size: 18px;
+}
+
+dt {
+  margin-bottom: 10px;
+}
+
+dd {
+  margin-bottom: 50px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+p.answer {
+  visibility: hidden;
+  position: absolute;
+  box-sizing: border-box;
+  width: 600px;
+  height: 35px;
+  padding: 5px 0 0 5px;
+  border: 1px solid;
+}
+
+p.correct {
+  visibility: visible;
+  border-color: #017F02;
+}
+
+p.incorrect {
+  visibility: visible;
+  border-color: #FF0000;
+}
+
+button {
+  border: none;
+  height: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  border-radius: 4px;
+  height: 35px;
+  cursor: pointer;
+}
+
+button#submit {
+  background: #55EC39;
+  width: 120px;
+}
+
+button#submit:disabled {
+  color: black;
+  background: #CCCCCC;
+}
+
+button#reset {
+  color: black;
+  background: #CCCCCC;
+  width: 70px;
+}
+
+button#reset.enabled {
+  background: #55EC39;
+  width: 70px;
+}
+

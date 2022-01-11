@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Multiple Choice Quiz</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="multiple_choice_quiz.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="multiple_choice_quiz.js"></script>
+  </head>
+  <body>
+    <div id="quiz">
+      <h1>Multiple Choice Quiz</h1>
+      <form>
+        <fieldset>
+          <dl id="question-list">
+          </dl>
+        </fieldset>
+        <button id="submit" type="submit">Submit Quiz</button>
+        <button id="reset" type="reset">Reset</button>
+      </form>
+    </div>
+    <script id="quiz-template" type="text/x-handlebars">
+      {{#each questions}}
+      <dt>Q{{id}}. {{{description}}}</dt>
+      <dd>
+        <ul>
+          {{#each options as |option|}}
+          <li>
+            <input type="radio" id="option1" name="question" value="{{option}}">
+            <label for="option1">{{option}}</label>
+          </li>
+          {{/each}}
+        </ul>
+        <p id="answer{{id}}" class="answer"></p>
+      </dd>
+      {{/each}}
+    </script>
+  </body>
+</html>
